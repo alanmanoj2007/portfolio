@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Manoj | CS Engineering Student | Web Developer | Creative Designer</title>
+    <meta name="description" content="Alan Manoj - Computer Science Engineering Student at SJCET. Web Developer, Creative Designer, and IEEE CASS Kerala SLT Member. Combining technology, creativity, and leadership to build impactful digital experiences.">
+    <meta name="keywords" content="Alan Manoj, SJCET, Computer Science Engineering, Web Developer, Creative Designer, IEEE CASS Kerala, μLearn, Portfolio">
+    <meta name="author" content="Alan Manoj">
+    <meta property="og:title" content="Alan Manoj | CS Engineering Student | Web Developer">
+    <meta property="og:description" content="Combining technology, creativity, and leadership to build impactful digital experiences.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a0a1a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dark-bg': '#06060f',
+                        'dark-card': '#0d0d1f',
+                        'dark-border': 'rgba(255,255,255,0.06)',
+                        'accent-blue': '#4f7fff',
+                        'accent-purple': '#8b5cf6',
+                        'accent-cyan': '#22d3ee',
+                        'glass-bg': 'rgba(255,255,255,0.03)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+                        'border-glow': 'borderGlow 4s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(79,127,255,0.3), 0 0 60px rgba(79,127,255,0.1)' },
+                            '50%': { boxShadow: '0 0 35px rgba(139,92,246,0.5), 0 0 90px rgba(34,211,238,0.2)' },
+                        },
+                        borderGlow: {
+                            '0%, 100%': { borderColor: 'rgba(79,127,255,0.4)' },
+                            '50%': { borderColor: 'rgba(139,92,246,0.7)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(40px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        :root {
+            --bg: #06060f;
+            --card: #0d0d1f;
+            --text: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-1: #4f7fff;
+            --accent-2: #8b5cf6;
+            --accent-3: #22d3ee;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-hover: rgba(255, 255, 255, 0.06);
+        }
+        .light {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --glass: rgba(0, 0, 0, 0.02);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-hover: rgba(0, 0, 0, 0.04);
+        }
+        * {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(79, 127, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 127, 255, 0.08);
+            transform: translateY(-4px);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #4f7fff, #8b5cf6, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-border {
+            position: relative;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, #4f7fff, #8b5cf6, #22d3ee);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #4f7fff, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 8px 30px rgba(79, 127, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--glass-border);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(79, 127, 255, 0.5);
+            background: rgba(79, 127, 255, 0.05);
+        }
+        .nav-link {
+            position: relative;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #4f7fff, #8b5cf6);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-link:hover {
+            color: var(--text);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .skill-bar {
+            height: 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #4f7fff, #8b5cf6, #22d3ee);
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4f7fff, #8b5cf6, #22d3ee);
+            top: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 3px solid #4f7fff;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .timeline-dot.active {
+            border-color: #22d3ee;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+            background: #22d3ee;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4f7fff, #8b5cf6);
+            border-radius: 10px;
+        }
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <canvas id="particle-canvas"></canvas>
+    <div id="app" class="relative z-10"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js">
+    </script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js">
+    </script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js">
+    </script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback, createContext, useContext } = React;
+
+        const ThemeContext = createContext();
+        const useTheme = () => useContext(ThemeContext);
+
+        function useTypingAnimation(strings, typingSpeed = 80, deletingSpeed = 40, pauseTime = 2000) {
+            const [displayText, setDisplayText] = useState('');
+            const [stringIndex, setStringIndex] = useState(0);
+            const [charIndex, setCharIndex] = useState(0);
+            const [isDeleting, setIsDeleting] = useState(false);
+            const [isPaused, setIsPaused] = useState(false);
+
+            useEffect(() => {
+                const currentString = strings[stringIndex];
+                let timeout;
+
+                if (isPaused) {
+                    timeout = setTimeout(() => {
+                        setIsPaused(false);
+                        setIsDeleting(true);
+                    }, pauseTime);
+                } else if (isDeleting) {
+                    if (charIndex > 0) {
+                        timeout = setTimeout(() => {
+                            setCharIndex(prev => prev - 1);
+                        }, deletingSpeed);
+                    } else {
+                        setIsDeleting(false);
+                        setStringIndex(prev => (prev + 1) % strings.length);
+                    }
+                } else {
+                    if (charIndex < currentString.length) {
+                        timeout = setTimeout(() => {
+                            setCharIndex(prev => prev + 1);
+                        }, typingSpeed);
+                    } else {
+                        setIsPaused(true);
+                    }
+                }
+
+                setDisplayText(currentString.substring(0, charIndex));
+                return () => clearTimeout(timeout);
+            }, [charIndex, isDeleting, isPaused, stringIndex, strings, typingSpeed, deletingSpeed, pauseTime]);
+
+            return displayText;
+        }
+
+        function useScrollReveal(threshold = 0.15) {
+            const ref = useRef(null);
+            const [isVisible, setIsVisible] = useState(false);
+
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting) {
+                            setIsVisible(true);
+                            observer.unobserve(entry.target);
+                        }
+                    }, { threshold, rootMargin: '0px 0px -40px 0px' }
+                );
+
+                if (ref.current) observer.observe(ref.current);
+                return () => observer.disconnect();
+            }, [threshold]);
+
+            return [ref, isVisible];
+        }
+
+        function useGitHubRepos(username) {
+            const [repos, setRepos] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [error, setError] = useState(null);
+
+            useEffect(() => {
+                const fetchRepos = async() => {
+                    try {
+                        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+                        if (!response.ok) throw new Error('Failed to fetch repos');
+                        const data = await response.json();
+                        const filtered = data.map(repo => ({
+                            id: repo.id,
+                            name: repo.name,
+                            description: repo.description || 'No description available',
+                            html_url: repo.html_url,
+                            homepage: repo.homepage || null,
+                            language: repo.language || 'N/A',
+                            stargazers_count: repo.stargazers_count,
+                            topics: repo.topics || [],
+                            updated_at: repo.updated_at,
+                        }));
+                        setRepos(filtered);
+                    } catch (err) {
+                        setError(err.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                };
+                fetchRepos();
+            }, [username]);
+
+            return { repos, loading, error };
+        }
+
+        function ParticleBackground() {
+            const canvasRef = useRef(null);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                let animationFrameId;
+                let particles = [];
+
+                const resize = () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                };
+
+                class Particle {
+                    constructor() {
+                        this.reset();
+                    }
+                    reset() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 2 + 0.5;
+                        this.speedX = (Math.random() - 0.5) * 0.4;
+                        this.speedY = (Math.random() - 0.5) * 0.4;
+                        this.opacity = Math.random() * 0.5 + 0.1;
+                        this.color = ['#4f7fff', '#8b5cf6', '#22d3ee'][Math.floor(Math.random() * 3)];
+                    }
+                    update() {
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                        if (this.x < -10 || this.x > canvas.width + 10 || this.y < -10 || this.y > canvas.height + 10) {
+                            this.reset();
+                        }
+                    }
+                    draw(ctx) {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.globalAlpha = this.opacity;
+                        ctx.fill();
+                        ctx.globalAlpha = 1;
+                    }
+                }
+
+                const init = () => {
+                    particles = [];
+                    const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 12000));
+                    for (let i = 0; i < count; i++) {
+                        particles.push(new Particle());
+                    }
+                };
+
+                const animate = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw(ctx);
+                    });
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist < 140) {
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.strokeStyle = 'rgba(79,127,255,0.06)';
+                                ctx.lineWidth = 0.5;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                    animationFrameId = requestAnimationFrame(animate);
+                };
+
+                resize();
+                init();
+                animate();
+                window.addEventListener('resize', () => {
+                    resize();
+                    init();
+                });
+
+                return () => {
+                    cancelAnimationFrame(animationFrameId);
+                    window.removeEventListener('resize', resize);
+                };
+            }, []);
+
+            return <canvas ref={canvasRef} id="particle-canvas" />;
+        }
+
+        function ScrollReveal({ children, className = '', delay = 0 }) {
+            const [ref, isVisible] = useScrollReveal(0.12);
+            return (
+                <div ref={ref} className={`${className} transition-all duration-800 ease-out`} style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+                    transitionDelay: `${delay}ms`,
+                    transitionDuration: '800ms',
+                }}>
+                    {children}
+                </div>
+            );
+        }
+
+        function Navbar({ darkMode, toggleDarkMode }) {
+            const [scrolled, setScrolled] = useState(false);
+            const [mobileOpen, setMobileOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navItems = ['Home', 'About', 'Skills', 'Projects', 'Experience', 'Contact'];
+
+            return (
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${scrolled ? 'bg-[var(--bg)]/85 backdrop-blur-xl border-b border-[var(--glass-border)] shadow-lg' : 'bg-transparent'}`}>
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex items-center justify-between h-16 md:h-20">
+                            <a href="#home" className="text-xl md:text-2xl font-display font-bold gradient-text">AM.</a>
+                            <div className="hidden md:flex items-center gap-1">
+                                {navItems.map(item => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} className="nav-link px-3 py-2">{item}</a>
+                                ))}
+                                <button onClick={toggleDarkMode} className="ml-4 p-2 rounded-full glass-card hover:border-[rgba(79,127,255,0.4)] transition-all cursor-pointer" aria-label="Toggle theme">
+                                    {darkMode ? '☀️' : '🌙'}
+                                </button>
+                            </div>
+                            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-2 glass-card cursor-pointer" aria-label="Menu">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} /></svg>
+                            </button>
+                        </div>
+                        {mobileOpen && (
+                            <div className="md:hidden absolute top-full left-0 right-0 bg-[var(--bg)]/95 backdrop-blur-xl border-b border-[var(--glass-border)] p-4 flex flex-col gap-2">
+                                {navItems.map(item => (
+                                    <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMobileOpen(false)} className="nav-link px-4 py-3 text-center rounded-lg hover:bg-[var(--glass)]">{item}</a>
+                                ))}
+                                <button onClick={toggleDarkMode} className="mt-2 p-3 rounded-lg glass-card text-center cursor-pointer">{darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}</button>
+                            </div>
+                        )}
+                    </div>
+                </nav>
+            );
+        }
+
+        function HeroSection() {
+            const typedText = useTypingAnimation([
+                'Computer Science Engineering Student',
+                'Web Developer',
+                'Creative Designer',
+                'IEEE CASS Kerala SLT Member',
+                'μLearn Creative Team Member',
+            ], 70, 35, 2200);
+
+            const scrollTo = (id) => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            return (
+                <section id="home" className="min-h-screen flex items-center justify-center relative pt-20">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+                            <div className="flex-1 text-center lg:text-left">
+                                <div className="inline-block mb-4 px-4 py-2 rounded-full glass-card text-sm font-medium text-[var(--text-secondary)]">
+                                    <span className="w-2 h-2 rounded-full bg-green-400 inline-block mr-2 animate-pulse"></span> Available for opportunities
+                                </div>
+                                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-3">
+                                    Alan <span className="gradient-text">Manoj</span>
+                                </h1>
+                                <div className="h-10 sm:h-12 mb-6">
+                                    <p className="text-lg sm:text-xl md:text-2xl text-[var(--text-secondary)] font-mono">
+                                        {typedText}<span className="inline-block w-[2px] h-6 bg-[#4f7fff] ml-1 animate-pulse align-middle"></span>
+                                    </p>
+                                </div>
+                                <p className="text-base sm:text-lg text-[var(--text-secondary)] max-w-xl mb-8 leading-relaxed">
+                                    "Combining technology, creativity, and leadership to build impactful digital experiences."
+                                </p>
+                                <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                                    <button onClick={() => scrollTo('projects')} className="btn-primary cursor-pointer">View Projects</button>
+                                    <button onClick={() => { const link = document.createElement('a'); link.href = 'resume.pdf'; link.download = 'Alan_Manoj_Resume.pdf'; link.click(); }} className="btn-secondary cursor-pointer">Download Resume</button>
+                                    <button onClick={() => scrollTo('contact')} className="btn-secondary cursor-pointer">Contact Me</button>
+                                </div>
+                                <div className="flex gap-4 mt-8 justify-center lg:justify-start">
+                                    {[
+                                        { icon: 'github', url: 'https://github.com/alanmanoj2007', label: 'GitHub' },
+                                        { icon: 'linkedin', url: 'https://www.linkedin.com/in/alan-manoj-bbab29326/', label: 'LinkedIn' },
+                                        { icon: 'email', url: 'mailto:alanmanoj59@gmail.com', label: 'Email' },
+                                    ].map(social => (
+                                        <a key={social.label} href={social.url} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full glass-card flex items-center justify-center hover:border-[rgba(79,127,255,0.5)] transition-all text-lg cursor-pointer" aria-label={social.label}>
+                                            {social.icon === 'github' && '⬡'} {social.icon === 'linkedin' && '◈'} {social.icon === 'email' && '✉'}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="flex-shrink-0 relative">
+                                <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full gradient-border overflow-hidden animate-glow-pulse">
+                                    <img
+                                        src="profile.jpg"
+                                        alt="Alan Manoj"
+                                        className="w-full h-full object-cover rounded-full"
+                                        onError={(e) => {
+                                            e.target.style.display = 'none';
+                                            e.target.parentNode.innerHTML = '<div class="w-full h-full rounded-full bg-gradient-to-br from-[#4f7fff]/20 via-[#8b5cf6]/20 to-[#22d3ee]/20 flex items-center justify-center text-6xl sm:text-7xl font-display font-bold gradient-text">AM</div>';
+                                        }}
+                                    />
+                                </div>
+                                <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-[#4f7fff]/5 via-[#8b5cf6]/5 to-[#22d3ee]/5 blur-3xl -z-10 animate-float"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function AboutSection() {
+            return (
+                <section id="about" className="py-20 md:py-28">
+                    <ScrollReveal>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+                                About <span className="gradient-text">Me</span>
+                            </h2>
+                            <p className="text-center text-[var(--text-secondary)] mb-12 max-w-2xl mx-auto">
+                                A passionate technologist and creative mind dedicated to building meaningful digital solutions.
+                            </p>
+                            <div className="glass-card p-6 sm:p-8 md:p-10 max-w-4xl mx-auto">
+                                <p className="text-[var(--text)] leading-relaxed text-base sm:text-lg">
+                                    I am a Computer Science Engineering student at <strong>St. Joseph's College of Engineering and Technology</strong> with a passion for software development, web technologies, creative design, and community leadership. As a <strong>Creative Team Member of μLearn SJC EXECOM</strong> and a <strong>Student Leadership Team Member of IEEE CASS Kerala Chapter</strong>, I actively contribute to technology communities while continuously improving my technical and creative skills. I enjoy building practical solutions, designing engaging digital experiences, and collaborating with innovative teams.
+                                </p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </section>
+            );
+        }
+
+        function EducationSection() {
+            return (
+                <section id="education" className="py-16 md:py-24">
+                    <ScrollReveal>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">Education</h2>
+                            <div className="glass-card p-6 sm:p-8 max-w-2xl mx-auto text-center">
+                                <div className="text-5xl mb-4">🎓</div>
+                                <h3 className="text-xl md:text-2xl font-display font-bold gradient-text">St. Joseph's College of Engineering and Technology</h3>
+                                <p className="text-[var(--text)] font-semibold mt-2">Bachelor of Technology (B.Tech)</p>
+                                <p className="text-[var(--text-secondary)]">Computer Science Engineering</p>
+                                <p className="text-[var(--text-secondary)] mt-2">Current Second-Year Student</p>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </section>
+            );
+        }
+
+        function SkillsSection() {
+            const [ref, isVisible] = useScrollReveal(0.1);
+            const skillCategories = [
+                { title: 'Programming Languages', icon: '💻', skills: [{ name: 'Java', level: 85 }, { name: 'C', level: 75 }, { name: 'Dart', level: 60 }, { name: 'SQL', level: 70 }] },
+                { title: 'Web Development', icon: '🌐', skills: [{ name: 'HTML5', level: 90 }, { name: 'CSS3', level: 85 }, { name: 'JavaScript', level: 80 }, { name: 'React.js', level: 70 }] },
+                { title: 'Database', icon: '🗄️', skills: [{ name: 'MySQL', level: 75 }, { name: 'XAMPP', level: 65 }] },
+                { title: 'Tools & Platforms', icon: '🛠️', skills: [{ name: 'Git & GitHub', level: 80 }, { name: 'VS Code', level: 90 }, { name: 'Eclipse IDE', level: 70 }, { name: 'Linux', level: 65 }] },
+                { title: 'Design & Creative', icon: '🎨', skills: [{ name: 'Graphic Design', level: 80 }, { name: 'Poster Design', level: 85 }, { name: 'Event Branding', level: 75 }, { name: 'Content Creation', level: 70 }, { name: 'Social Media Design', level: 80 }] },
+                { title: 'Soft Skills', icon: '🤝', skills: [{ name: 'Leadership', level: 85 }, { name: 'Team Collaboration', level: 90 }, { name: 'Communication', level: 80 }, { name: 'Problem Solving', level: 85 }, { name: 'Event Management', level: 75 }] },
+            ];
+
+            return (
+                <section id="skills" className="py-16 md:py-24">
+                    <div ref={ref} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+                            Skills & <span className="gradient-text">Expertise</span>
+                        </h2>
+                        <p className="text-center text-[var(--text-secondary)] mb-12 max-w-2xl mx-auto">
+                            A diverse skill set spanning development, design, and leadership.
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {skillCategories.map((cat, idx) => (
+                                <div key={cat.title} className="glass-card p-5 sm:p-6" style={{ transitionDelay: `${idx * 80}ms` }}>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <span className="text-2xl">{cat.icon}</span>
+                                        <h3 className="text-lg font-display font-bold">{cat.title}</h3>
+                                    </div>
+                                    <div className="space-y-3">
+                                        {cat.skills.map(skill => (
+                                            <div key={skill.name}>
+                                                <div className="flex justify-between text-sm mb-1">
+                                                    <span>{skill.name}</span>
+                                                    <span className="text-[var(--text-secondary)]">{skill.level}%</span>
+                                                </div>
+                                                <div className="skill-bar">
+                                                    <div className="skill-bar-fill" style={{ width: isVisible ? `${skill.level}%` : '0%' }} />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function ProjectsSection() {
+            const { repos, loading } = useGitHubRepos('alanmanoj2007');
+            const featuredProjects = [
+                { name: 'Car Rental Management System', description: 'A complete car rental management solution with user authentication, vehicle management, booking system, and database connectivity.', tech: 'Java Swing, MySQL', features: ['User authentication', 'Vehicle management', 'Booking system', 'Database connectivity'], icon: '🚗' },
+                { name: 'Student Timetable & Task Tracker', description: 'A productivity tool for students featuring task scheduling, event reminders, and comprehensive productivity management.', tech: 'Web Technologies', features: ['Task scheduling', 'Event reminders', 'Productivity management'], icon: '📅' },
+                { name: 'Personal Portfolio Website', description: 'A modern responsive portfolio with interactive animations and professional branding, built with cutting-edge web technologies.', tech: 'React.js, Tailwind CSS, Framer Motion', features: ['Modern responsive design', 'Interactive animations', 'Professional branding'], icon: '✨' },
+            ];
+
+            return (
+                <section id="projects" className="py-16 md:py-24">
+                    <ScrollReveal>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+                                Featured <span className="gradient-text">Projects</span>
+                            </h2>
+                            <p className="text-center text-[var(--text-secondary)] mb-12 max-w-2xl mx-auto">
+                                Showcasing my best work and technical capabilities.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+                                {featuredProjects.map((project, idx) => (
+                                    <div key={project.name} className="glass-card p-6 flex flex-col" style={{ transitionDelay: `${idx * 100}ms` }}>
+                                        <div className="text-4xl mb-4">{project.icon}</div>
+                                        <h3 className="text-lg font-display font-bold mb-2">{project.name}</h3>
+                                        <p className="text-[var(--text-secondary)] text-sm mb-3 flex-grow">{project.description}</p>
+                                        <p className="text-xs font-mono text-[#4f7fff] mb-3">{project.tech}</p>
+                                        <ul className="space-y-1 mb-4">
+                                            {project.features.map(f => (
+                                                <li key={f} className="text-xs text-[var(--text-secondary)] flex items-center gap-1">
+                                                    <span className="text-green-400">✓</span> {f}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                            <h3 className="text-2xl font-display font-bold text-center mb-6">
+                                GitHub <span className="gradient-text">Repositories</span>
+                            </h3>
+                            {loading ? (
+                                <div className="text-center text-[var(--text-secondary)] py-8">
+                                    <div className="inline-block w-8 h-8 border-2 border-[#4f7fff] border-t-transparent rounded-full animate-spin"></div>
+                                    <p className="mt-3">Loading repositories...</p>
+                                </div>
+                            ) : (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                                    {repos.map(repo => (
+                                        <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className="glass-card p-5 block hover:no-underline cursor-pointer">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span className="text-lg">📂</span>
+                                                <h4 className="font-display font-bold text-sm truncate">{repo.name.replace(/-/g, ' ')}</h4>
+                                            </div>
+                                            <p className="text-xs text-[var(--text-secondary)] mb-3 line-clamp-2">{repo.description}</p>
+                                            <div className="flex items-center gap-2 flex-wrap">
+                                                {repo.language !== 'N/A' && (
+                                                    <span className="text-xs px-2 py-1 rounded-full bg-[#4f7fff]/15 text-[#4f7fff] font-mono">{repo.language}</span>
+                                                )}
+                                                <span className="text-xs text-[var(--text-secondary)]">⭐ {repo.stargazers_count}</span>
+                                            </div>
+                                            {repo.homepage && (
+                                                <span className="text-xs text-[#22d3ee] mt-2 inline-block">🔗 Live Demo</span>
+                                            )}
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </ScrollReveal>
+                </section>
+            );
+        }
+
+        function ExperienceSection() {
+            const experiences = [
+                { title: 'Student Leadership Team (SLT) Member', org: 'IEEE CASS Kerala Chapter', period: 'Present', description: 'Support technical initiatives and events, collaborate with student leaders across Kerala, and promote innovation and learning opportunities.', icon: '🏛️', color: '#4f7fff' },
+                { title: 'Creative Team Member', org: 'μLearn SJC EXECOM 2026-27', period: '2026-27', description: 'Design promotional and branding materials, support community engagement campaigns, and create visual content for events.', icon: '🎯', color: '#8b5cf6' },
+                { title: 'Event Creative Leadership', org: 'College Events', period: '2024-Present', description: 'Led design and promotional activities for college events, managed visual branding and social media campaigns, and coordinated creative teams.', icon: '🎪', color: '#22d3ee' },
+            ];
+
+            return (
+                <section id="experience" className="py-16 md:py-24">
+                    <ScrollReveal>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">
+                                Experience & <span className="gradient-text">Leadership</span>
+                            </h2>
+                            <div className="relative max-w-3xl mx-auto">
+                                <div className="timeline-line hidden md:block"></div>
+                                {experiences.map((exp, idx) => (
+                                    <div key={exp.title} className={`flex flex-col md:flex-row gap-4 md:gap-8 mb-10 relative ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                        <div className="hidden md:block timeline-dot" style={{ top: '20px', backgroundColor: exp.color }} />
+                                        <div className="flex-1"></div>
+                                        <div className="flex-1 glass-card p-5 sm:p-6">
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <span className="text-2xl">{exp.icon}</span>
+                                                <div>
+                                                    <h3 className="font-display font-bold text-sm sm:text-base">{exp.title}</h3>
+                                                    <p className="text-xs font-mono" style={{ color: exp.color }}>{exp.org}</p>
+                                                </div>
+                                            </div>
+                                            <p className="text-sm text-[var(--text-secondary)]">{exp.description}</p>
+                                            <span className="text-xs text-[var(--text-secondary)] mt-2 inline-block">{exp.period}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </section>
+            );
+        }
+
+        function AchievementsSection() {
+            const achievements = [
+                { title: 'IEEE Leadership Participation', description: 'Active member of IEEE CASS Kerala Student Leadership Team', icon: '🏆' },
+                { title: 'μLearn Executive Team Selection', description: 'Selected for Creative Team at μLearn SJC EXECOM 2026-27', icon: '🌟' },
+                { title: 'Event Leadership Experience', description: 'Led creative direction for multiple college events', icon: '🎖️' },
+                { title: 'Web Development Projects', description: 'Built multiple production-ready web applications', icon: '💻' },
+                { title: 'Creative Design Contributions', description: 'Designed branding for tech communities and events', icon: '🎨' },
+            ];
+
+            return (
+                <section id="achievements" className="py-16 md:py-24">
+                    <ScrollReveal>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-12">Achievements</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                                {achievements.map((ach, idx) => (
+                                    <div key={ach.title} className="glass-card p-6 text-center hover:border-[rgba(79,127,255,0.4)] transition-all cursor-default" style={{ transitionDelay: `${idx * 80}ms` }}>
+                                        <div className="text-4xl mb-3">{ach.icon}</div>
+                                        <h3 className="font-display font-bold text-sm mb-2">{ach.title}</h3>
+                                        <p className="text-xs text-[var(--text-secondary)]">{ach.description}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </section>
+            );
+        }
+
+        function ContactSection() {
+            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+            const [submitted, setSubmitted] = useState(false);
+            const [copied, setCopied] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                setSubmitted(true);
+                setTimeout(() => setSubmitted(false), 3000);
+                setFormData({ name: '', email: '', message: '' });
+            };
+
+            const copyToClipboard = (text, label) => {
+                navigator.clipboard.writeText(text).then(() => {
+                    setCopied(label);
+                    setTimeout(() => setCopied(''), 2000);
+                });
+            };
+
+            return (
+                <section id="contact" className="py-16 md:py-24">
+                    <ScrollReveal>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+                                Get In <span className="gradient-text">Touch</span>
+                            </h2>
+                            <p className="text-center text-[var(--text-secondary)] mb-12 max-w-2xl mx-auto">
+                                I'd love to connect! Whether it's for collaboration, opportunities, or just a friendly chat.
+                            </p>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                                <div className="glass-card p-6 sm:p-8">
+                                    <h3 className="text-xl font-display font-bold mb-6">Send a Message</h3>
+                                    <form onSubmit={handleSubmit} className="space-y-4">
+                                        <input type="text" placeholder="Your Name" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-[var(--glass)] border border-[var(--glass-border)] text-[var(--text)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#4f7fff] transition-all text-sm" />
+                                        <input type="email" placeholder="Your Email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-[var(--glass)] border border-[var(--glass-border)] text-[var(--text)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#4f7fff] transition-all text-sm" />
+                                        <textarea placeholder="Your Message" rows="5" required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="w-full px-4 py-3 rounded-xl bg-[var(--glass)] border border-[var(--glass-border)] text-[var(--text)] placeholder-[var(--text-secondary)] focus:outline-none focus:border-[#4f7fff] transition-all text-sm resize-none"></textarea>
+                                        <button type="submit" className="btn-primary w-full cursor-pointer">{submitted ? '✅ Message Sent!' : 'Send Message'}</button>
+                                    </form>
+                                </div>
+                                <div className="space-y-4">
+                                    {[
+                                        { label: 'Email', value: 'alanmanoj59@gmail.com', icon: '✉️', href: 'mailto:alanmanoj59@gmail.com' },
+                                        { label: 'GitHub', value: 'github.com/alanmanoj2007', icon: '⬡', href: 'https://github.com/alanmanoj2007' },
+                                        { label: 'LinkedIn', value: 'linkedin.com/in/alan-manoj-bbab29326', icon: '◈', href: 'https://www.linkedin.com/in/alan-manoj-bbab29326/' },
+                                    ].map(item => (
+                                        <div key={item.label} className="glass-card p-5 flex items-center gap-4">
+                                            <span className="text-2xl">{item.icon}</span>
+                                            <div className="flex-grow min-w-0">
+                                                <p className="text-xs text-[var(--text-secondary)]">{item.label}</p>
+                                                <p className="text-sm font-mono truncate">{item.value}</p>
+                                            </div>
+                                            <button onClick={() => copyToClipboard(item.value.replace('mailto:', ''), item.label)} className="text-xs px-3 py-1.5 rounded-lg glass-card hover:border-[rgba(79,127,255,0.4)] transition-all cursor-pointer flex-shrink-0">
+                                                {copied === item.label ? 'Copied!' : 'Copy'}
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+                </section>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="border-t border-[var(--glass-border)] py-8">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <p className="text-[var(--text-secondary)] text-sm">
+                            © {new Date().getFullYear()} Alan Manoj. All rights reserved. Built with ❤️
+                        </p>
+                    </div>
+                </footer>
+            );
+        }
+
+        function BackToTop() {
+            const [visible, setVisible] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setVisible(window.scrollY > 500);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (!visible) return null;
+
+            return (
+                <button onClick={scrollToTop} className="fixed bottom-6 right-6 w-11 h-11 rounded-full glass-card flex items-center justify-center text-lg hover:border-[rgba(79,127,255,0.5)] transition-all z-40 cursor-pointer shadow-lg" aria-label="Back to top">
+                    ↑
+                </button>
+            );
+        }
+
+        function App() {
+            const [darkMode, setDarkMode] = useState(true);
+
+            useEffect(() => {
+                document.body.classList.toggle('light', !darkMode);
+                const root = document.documentElement;
+                if (darkMode) {
+                    root.style.setProperty('--bg', '#06060f');
+                    root.style.setProperty('--card', '#0d0d1f');
+                    root.style.setProperty('--text', '#e2e8f0');
+                    root.style.setProperty('--text-secondary', '#94a3b8');
+                    root.style.setProperty('--glass', 'rgba(255,255,255,0.03)');
+                    root.style.setProperty('--glass-border', 'rgba(255,255,255,0.06)');
+                    root.style.setProperty('--glass-hover', 'rgba(255,255,255,0.06)');
+                } else {
+                    root.style.setProperty('--bg', '#f8fafc');
+                    root.style.setProperty('--card', '#ffffff');
+                    root.style.setProperty('--text', '#1e293b');
+                    root.style.setProperty('--text-secondary', '#64748b');
+                    root.style.setProperty('--glass', 'rgba(0,0,0,0.02)');
+                    root.style.setProperty('--glass-border', 'rgba(0,0,0,0.08)');
+                    root.style.setProperty('--glass-hover', 'rgba(0,0,0,0.04)');
+                }
+            }, [darkMode]);
+
+            const toggleDarkMode = () => setDarkMode(prev => !prev);
+
+            return (
+                <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+                    <ParticleBackground />
+                    <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                    <main>
+                        <HeroSection />
+                        <AboutSection />
+                        <EducationSection />
+                        <SkillsSection />
+                        <ProjectsSection />
+                        <ExperienceSection />
+                        <AchievementsSection />
+                        <ContactSection />
+                    </main>
+                    <Footer />
+                    <BackToTop />
+                </ThemeContext.Provider>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('app'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
